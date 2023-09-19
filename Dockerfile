@@ -57,7 +57,7 @@ RUN groupadd fitcrack
 RUN usermod -a -G fitcrack boincadm
 
 # Dependencies for building BOINC Server
-RUN apt install -yq build-essential
+RUN apt-get -y update && apt install -yq build-essential
 RUN apt install -yq m4 dh-autoreconf pkg-config git \
                     libmysqlclient-dev zlib1g zlib1g-dev \
                     libcurl4-openssl-dev
@@ -72,7 +72,7 @@ RUN apt install -yq perl libcompress-raw-lzma-perl
 RUN apt install -yq php php-xml php-mysql php-cli php-gd
 
 # Python3 with MySQL connectors
-RUN apt install -yq python3 python3-pymysql python3-pip python3-mysqldb
+RUN apt-get -y update && apt install -yq python3 python3-pymysql python3-pip python3-mysqldb
 RUN pip3 install urllib3==1.26.15
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
@@ -119,7 +119,7 @@ WORKDIR /srv/fitcrack/
 
 # Build runner
 WORKDIR /srv/fitcrack/runner
-RUN apt-get install -y g++-mingw-w64-x86-64
+RUN apt-get -y update && apt-get install -y g++-mingw-w64-x86-64
 RUN chmod +x ./update_client_bins.sh
 RUN bash ./update_client_bins.sh
 
